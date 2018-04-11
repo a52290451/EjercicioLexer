@@ -1,0 +1,10 @@
+X = 10
+B = 5 
+si X >= B entonces
+	X = X + B
+si no entonces
+	X = X - B
+para X = 1 hasta X = B hacer
+	X = X + 1
+para B = X hasta B = X + 10 hacer
+	B = B * X
