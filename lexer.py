@@ -2,7 +2,13 @@ import ply.lex as lex
 
 tokens = [ 'NAME','NUMBER','PLUS','MINUS','TIMES','DIVIDE', 'EQUALS','MENOR','MAYOR','DIFERENTE','MENORIGUAL','MAYORIGUAL' ]
 
-reservadas = ['si']
+reservadas = ['SI', 'ENTONCES', 'NO', 'PARA', 'HASTA', 'HACER']
+
+def palReservada(c):
+    if(c.upper() in reservadas):
+        return True
+    else
+        return False
 
 t_ignore = ' \t\n'
 t_PLUS = r'\+'
@@ -10,7 +16,6 @@ t_MINUS = r'-'
 t_TIMES = r'\*'
 t_DIVIDE = r'/'
 t_EQUALS = r'='
-t_NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
 t_MENOR = r'\<'
 t_MAYOR = r'\>'
 t_DIFERENTE = r'\!='
@@ -25,6 +30,14 @@ def t_NUMBER(t):
     t.value = int(t.value)
     return t
 
+def t_NAME(t):
+    r'[a-zA-Z_][a-zA-Z0-9_]*'
+    if(not(palReservada(t.value))):
+        return t
+    else:
+        t.type = "Palabra Reservada"
+return t
+
 # Error handling rule
 def t_error(t):
     print("Illegal character '%s'" % t.value[0])
@@ -32,7 +45,7 @@ def t_error(t):
 
 lex.lex() # Build the lexer
 for y in listaC:
-    print y
+    #print y
     lex.input(y)
     while True:
         tok = lex.token()
